@@ -1,6 +1,6 @@
 package Enos.SpringProject.literAlura.models;
 
-import java.util.List;
+import Enos.SpringProject.literAlura.models.gutendex.PersonGutendex;
 
 public abstract class Person {
 
@@ -8,7 +8,28 @@ public abstract class Person {
     protected String name;
     protected Integer birthYear;
     protected Integer deathYear;
-    protected List<Book> books;
 
+    public Person(){}
 
+    public Person(PersonGutendex personGutendex){
+        this.name = personGutendex.name();
+        this.birthYear = personGutendex.birthYear();
+        this.deathYear = personGutendex.deathYear();
+    }
+
+    public Integer getBirthYear() {
+        return birthYear;
+    }
+
+    public Integer getDeathYear() {
+        return deathYear;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
