@@ -5,6 +5,7 @@ import Enos.SpringProject.literAlura.models.associations.TranslatorBookAssociati
 import Enos.SpringProject.literAlura.models.gutendex.PersonGutendex;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,6 +22,7 @@ public class Translator extends Person{
 
     public Translator(PersonGutendex personGutendex){
         super(personGutendex);
+        books = new ArrayList<>();
     }
 
     public List<TranslatorBookAssociation> getBooks() {

@@ -5,6 +5,7 @@ import Enos.SpringProject.literAlura.models.associations.AuthorBookAssociation;
 import Enos.SpringProject.literAlura.models.gutendex.PersonGutendex;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,6 +22,7 @@ public class Author extends Person{
 
     public Author(PersonGutendex personGutendex){
         super(personGutendex);
+        books = new ArrayList<>();
     }
 
     public List<AuthorBookAssociation> getBooks() {

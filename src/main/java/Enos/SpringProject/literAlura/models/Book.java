@@ -6,6 +6,7 @@ import Enos.SpringProject.literAlura.models.associations.TranslatorBookAssociati
 import Enos.SpringProject.literAlura.models.gutendex.BookGutendex;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,6 +39,11 @@ public class Book {
     public Book(){}
 
     public Book(BookGutendex bookGutendex){
+        subjects = new ArrayList<>();
+        bookshelves = new ArrayList<>();
+        languages = new ArrayList<>();
+        translators = new ArrayList<>();
+        authors = new ArrayList<>();
         this.id = bookGutendex.id();
         this.title = bookGutendex.title();
         this.copyright = bookGutendex.copyright();
