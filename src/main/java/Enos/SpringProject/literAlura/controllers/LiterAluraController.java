@@ -1,12 +1,11 @@
 package Enos.SpringProject.literAlura.controllers;
 
-import Enos.SpringProject.literAlura.models.Author;
-import Enos.SpringProject.literAlura.models.Book;
-import Enos.SpringProject.literAlura.models.Format;
-import Enos.SpringProject.literAlura.models.Translator;
+import Enos.SpringProject.literAlura.models.*;
 import Enos.SpringProject.literAlura.services.BookService;
 import Enos.SpringProject.literAlura.services.ConsumeAPI;
 import Enos.SpringProject.literAlura.services.ConvertData;
+
+import java.util.List;
 
 public class LiterAluraController {
 
@@ -29,6 +28,18 @@ public class LiterAluraController {
 
     public void setBookFormats(Book book, Format format){
         bookService.setBookFormats(book,format);
+    }
+
+    public void setBookSubjects(Book book, List<String> subjects){
+        bookService.setBookSubjects(book,subjects);
+    }
+
+    public void setBookBookshelves(Book book, List<String> bookshelves){
+        bookService.setBookBookshelves(book,bookshelves);
+    }
+
+    public void setBookLanguages(Book book, List<String> languages){
+        bookService.setBookLanguages(book,languages);
     }
 
 }

@@ -4,21 +4,35 @@ import Enos.SpringProject.literAlura.exceptions.NullObjectException;
 import Enos.SpringProject.literAlura.models.associations.AuthorBookAssociation;
 import Enos.SpringProject.literAlura.models.associations.TranslatorBookAssociation;
 import Enos.SpringProject.literAlura.models.gutendex.BookGutendex;
+import jakarta.persistence.*;
 
 import java.util.List;
 
+@Entity
+@Table(name = "books")
 public class Book {
 
+    @Id
     private Long id;
+    @Column(name = "title",unique = true)
     private String title;
-    private List<String> subjects;
-    private List<String> bookshelves;
-    private List<String> languages;
+    @OneToMany(mappedBy = "book",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private List<Subject> subjects;
+    @OneToMany(mappedBy = "book",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private List<Bookshelve> bookshelves;
+    @OneToMany(mappedBy = "book",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private List<Language> languages;
+    @Column(name = "copyright")
     private Boolean copyright;
+    @Column(name = "media_type")
     private String mediaType;
+    @Column(name = "downloads")
     private Integer downloads;
+    @OneToMany(mappedBy = "book",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<TranslatorBookAssociation> translators;
+    @OneToMany(mappedBy = "book",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<AuthorBookAssociation> authors;
+    @OneToOne(mappedBy = "book",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Format format;
 
     public Book(){}
@@ -26,9 +40,6 @@ public class Book {
     public Book(BookGutendex bookGutendex){
         this.id = bookGutendex.id();
         this.title = bookGutendex.title();
-        this.subjects = bookGutendex.subjects();
-        this.bookshelves = bookGutendex.bookshelves();
-        this.languages = bookGutendex.languages();
         this.copyright = bookGutendex.copyright();
         this.mediaType = bookGutendex.mediaType();
         this.downloads = bookGutendex.downloads();
@@ -46,7 +57,7 @@ public class Book {
         return translators;
     }
 
-    public List<String> getSubjects() {
+    public List<Subject> getSubjects() {
         return subjects;
     }
 
@@ -54,7 +65,7 @@ public class Book {
         return mediaType;
     }
 
-    public List<String> getLanguages() {
+    public List<Language> getLanguages() {
         return languages;
     }
 
@@ -70,12 +81,36 @@ public class Book {
         return copyright;
     }
 
-    public List<String> getBookshelves() {
+    public List<Bookshelve> getBookshelves() {
         return bookshelves;
     }
 
     public List<AuthorBookAssociation> getAuthors() {
         return authors;
+    }
+
+    public void addLanguage(Language language){
+        if(language == null){
+            throw new NullObjectException("Cant add subject, because subject is null");
+        } else {
+            this.languages.add(language);
+        }
+    }
+
+    public void addBookshelve(Bookshelve bookshelve){
+        if(bookshelve == null){
+            throw new NullObjectException("Cant add subject, because subject is null");
+        } else {
+            this.bookshelves.add(bookshelve);
+        }
+    }
+
+    public void addSubject(Subject subject){
+        if(subject == null){
+            throw new NullObjectException("Cant add subject, because subject is null");
+        } else {
+            this.subjects.add(subject);
+        }
     }
 
     public void setFormat(Format format){

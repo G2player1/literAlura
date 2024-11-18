@@ -1,12 +1,21 @@
 package Enos.SpringProject.literAlura.models;
 
 import Enos.SpringProject.literAlura.models.gutendex.PersonGutendex;
+import jakarta.persistence.*;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "persons")
 public abstract class Person {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "name")
     protected String name;
+    @Column(name = "birth_year")
     protected Integer birthYear;
+    @Column(name = "detah_year")
     protected Integer deathYear;
 
     public Person(){}

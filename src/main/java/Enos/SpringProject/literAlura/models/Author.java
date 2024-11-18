@@ -3,11 +3,18 @@ package Enos.SpringProject.literAlura.models;
 import Enos.SpringProject.literAlura.exceptions.NullObjectException;
 import Enos.SpringProject.literAlura.models.associations.AuthorBookAssociation;
 import Enos.SpringProject.literAlura.models.gutendex.PersonGutendex;
+import jakarta.persistence.*;
 
 import java.util.List;
 
+@Entity
+@Table(name = "authors")
 public class Author extends Person{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToMany(mappedBy = "author",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<AuthorBookAssociation> books;
 
     public Author(){super();}
