@@ -3,12 +3,16 @@ package Enos.SpringProject.literAlura.services;
 import Enos.SpringProject.literAlura.models.*;
 import Enos.SpringProject.literAlura.models.associations.AuthorBookAssociation;
 import Enos.SpringProject.literAlura.models.associations.TranslatorBookAssociation;
+import Enos.SpringProject.literAlura.models.gutendex.FormatGuntedex;
+import Enos.SpringProject.literAlura.models.gutendex.PersonGutendex;
 
 import java.util.List;
 
 public class BookService {
 
-    public void setBookFormats(Book book,Format format){
+    public void setBookFormats(Book book, FormatGuntedex formatGuntedex){
+        Format format = new Format(formatGuntedex);
+        format.setBook(book);
         book.setFormat(format);
     }
 
@@ -33,6 +37,20 @@ public class BookService {
             Language language = new Language(string);
             language.setBook(book);
             book.addLanguage(language);
+        }
+    }
+
+    public void setBookAuthors(Book book, List<PersonGutendex> authors){
+        for (PersonGutendex personGutendex : authors){
+            Author author = new Author(personGutendex);
+            setAuthorBookAssociation(book,author);
+        }
+    }
+
+    public void setBookTranslators(Book book, List<PersonGutendex> translators){
+        for (PersonGutendex personGutendex : translators){
+            Translator translator = new Translator(personGutendex);
+            setTranslatorBookAssociation(book,translator);
         }
     }
 

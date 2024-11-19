@@ -2,17 +2,18 @@ package Enos.SpringProject.literAlura.models.associations;
 
 import Enos.SpringProject.literAlura.models.Author;
 import Enos.SpringProject.literAlura.models.Book;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "author_book")
 public class AuthorBookAssociation {
 
-    @ManyToOne
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Author author;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Book book;
 
     public AuthorBookAssociation(){}
@@ -20,6 +21,10 @@ public class AuthorBookAssociation {
     public AuthorBookAssociation(Author author,Book book){
         this.author = author;
         this.book = book;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Author getAuthor() {

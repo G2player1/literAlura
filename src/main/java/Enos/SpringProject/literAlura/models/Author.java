@@ -25,6 +25,21 @@ public class Author extends Person{
         books = new ArrayList<>();
     }
 
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public Integer getBirthYear(){
+        return this.birthYear;
+    }
+
+    @Override
+    public Integer getDeathYear(){
+        return this.deathYear;
+    }
+
     public List<AuthorBookAssociation> getBooks() {
         return books;
     }
@@ -35,5 +50,16 @@ public class Author extends Person{
         } else {
             books.add(book);
         }
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "-----------Autor-----------" + '\n' +
+                "Nome: " + name + '\n' +
+                "Ano de Nascimento: " + birthYear + '\n' +
+                "Ano da Morte: " + deathYear + '\n' +
+                "--------------------------" + '\n';
     }
 }
